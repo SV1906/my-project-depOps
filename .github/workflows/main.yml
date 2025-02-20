@@ -23,6 +23,6 @@ jobs:
           docker build -t $DOCKERHUB_USERNAME/$IMAGE_NAME .
           docker push $DOCKERHUB_USERNAME/$IMAGE_NAME:latest
       - name: Run tests
-        run: python test_hello.py
+        run: python test.py
 
   
