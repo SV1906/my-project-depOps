@@ -1,15 +1,15 @@
-import pytest
-from app import app
+import unittest
+from app import app 
 
+class TestHelloWorld(unittest.TestCase):
 
-@pytest.fixture
-def client():
-    app.config['TESTING'] = True
-    with app.test_client() as client:
-        yield client
+    def setUp(self):
+        self.client = app.test_client()
 
+    def test_hello_world(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Hello, World!', response.data)
 
-def test_app_is_working(client):
-    response = client.get('/')
-    assert response.status_code == 200
-    assert b"Hello World!" in response.data
+if __name__ == '__main__':
+    unittest.main()
